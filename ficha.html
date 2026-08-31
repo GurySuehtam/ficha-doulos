@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Família Doulos - Bem-vindo</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#c79a15;--black:#0f0f0f;--bg:#fdf9ec}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:#222}
+header{background:var(--black);color:#fff;text-align:center;padding:16px 12px}
+header h1{font-family:'Montserrat';font-size:14px;letter-spacing:1px}
+.pastores{color:var(--gold);font-size:10px;margin-top:6px}
+.hero{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;text-align:center}
+.logo{width:96px;height:96px;border-radius:50%;background:#fff;border:3px solid var(--gold);display:grid;place-items:center;font-family:'Montserrat';font-weight:800}
+.hero h2{font-family:'Montserrat';font-size:36px;margin-top:14px;line-height:1.1}
+.hero h2 span{color:var(--gold)}
+.verse{margin:14px 0;font-style:italic;color:#666;font-size:14px}
+.card-welcome{width:100%;max-width:420px;background:#fff;border-radius:18px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.07);margin-top:10px}
+.card-welcome input{width:100%;padding:14px;border:1.5px solid #e6e0c8;border-radius:12px;font-size:16px;margin-top:8px}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;font-family:'Montserrat';font-weight:800;cursor:pointer;margin-top:12px}
+.btn-gold{background:var(--gold);color:#111}
+.section{padding:24px 18px;max-width:560px;margin:0 auto}
+.grid{display:grid;gap:14px}
+.card-contact{background:#fff;border-radius:16px;padding:16px;border-top:3px solid var(--gold)}
+.cargo{font-size:11px;color:var(--gold);font-weight:800;letter-spacing:1px}
+.nome{font-family:'Montserrat';font-size:15px;margin:4px 0 10px}
+.btn-black{background:var(--black);color:#fff}
+</style>
+</head>
+<body>
+<header>
+  <h1>IGREJA ASSEMBLÉIA DE DEUS MINISTÉRIO DOULOS</h1>
+  <div class="pastores">Pr. Presidente Robson da Costa Moreira | Vice Ev. Lucas</div>
+</header>
+
+<div class="hero">
+  <div class="logo">DOULOS</div>
+  <h2>Bem-vindo à<br><span>Família Doulos!</span></h2>
+  <div class="verse">“Eis que tudo se fez novo.” — 2 Coríntios 5:17</div>
+  <div class="card-welcome">
+    <label style="font-weight:600;font-size:13px;text-align:left;display:block">Como podemos te chamar?</label>
+    <input id="firstName" placeholder="Digite seu primeiro nome">
+    <button class="btn btn-gold" id="btnContinuar">Continuar →</button>
+  </div>
+</div>
+
+<div class="section">
+  <h3 style="font-family:Montserrat;text-align:center;margin-bottom:14px">Estamos aqui por você</h3>
+  <div class="grid">
+    <div class="card-contact">
+      <div class="cargo">PASTOR PRESIDENTE</div>
+      <div class="nome">Pr. Robson da Costa Moreira</div>
+      <button class="btn btn-black" onclick="falar('presidente')">Entrar em contato com o Pastor Presidente</button>
+    </div>
+    <div class="card-contact">
+      <div class="cargo">VICE-PRESIDENTE</div>
+      <div class="nome">Evangelista Lucas</div>
+      <button class="btn btn-black" onclick="falar('vice')">Entrar em contato com o Vice-Presidente</button>
+    </div>
+    <div class="card-contact" style="border-top-color:#25D366">
+      <div class="cargo" style="color:#25D366">SECRETARIA</div>
+      <div class="nome">Missionária Cristina</div>
+      <button class="btn btn-gold" onclick="falar('secretaria')">Entrar em contato com a Secretária</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const CONTATOS = {
+  presidente: {numero:"5521968236071", msg:"Olá Pr. Robson, estou no site da Família Doulos e gostaria de conversar."},
+  vice: {numero:"5521992476004", msg:"Olá Ev. Lucas, estou no site da Família Doulos e gostaria de conversar."},
+  secretaria: {numero:"5521983234385", msg:"Olá Missionária Cristina, estou no site da Família Doulos."}
+};
+function falar(t){
+  const c=CONTATOS[t];
+  window.open(`https://wa.me/${c.numero}?text=${encodeURIComponent(c.msg)}`,'_blank');
+}
+document.getElementById('btnContinuar').addEventListener('click', function(){
+  const nome = document.getElementById('firstName').value.trim();
+  if(!nome){ alert('Digite seu nome!'); return; }
+  localStorage.setItem('doulos_nome', nome);
+  window.location.href = 'bem-vindo.html';
+});
+</script>
+</body>
+</html>
