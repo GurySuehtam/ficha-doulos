@@ -87,10 +87,73 @@ if(nomeSalvo){
   document.getElementById('nome').value = nomeSalvo;
 }
 function next(c,n){document.getElementById('s'+c).classList.remove('active');document.getElementById('s'+n).classList.add('active');document.getElementById('bar').style.width=(n*25)+'%';window.scrollTo(0,0);}
+
 function enviar(){
-  const d={nome:document.getElementById('nome').value,tel:document.getElementById('tel').value,nasc:document.getElementById('nasc').value,sexo:document.getElementById('sexo').value,rg:document.getElementById('rg').value,cpf:document.getElementById('cpf').value,civil:document.getElementById('civil').value,prof:document.getElementById('prof').value,end:document.getElementById('end').value,bairro:document.getElementById('bairro').value,cep:document.getElementById('cep').value,pai:document.getElementById('pai').value,mae:document.getElementById('mae').value,conjuge:document.getElementById('conjuge').value,filhos:document.getElementById('filhos').value,conversao:document.getElementById('conversao').value,batizado:document.getElementById('batizado').value,igant:document.getElementById('igant').value,carteirinha:document.getElementById('carteirinha').value,pastor:document.getElementById('pastor').value,ministerio:document.getElementById('ministerio').value,obs:document.getElementById('obs').value,assinatura:document.getElementById('assinatura').value};
+  const d={
+    nome: document.getElementById('nome').value.trim(),
+    tel: document.getElementById('tel').value.trim(),
+    nasc: document.getElementById('nasc').value.trim(),
+    sexo: document.getElementById('sexo').value,
+    rg: document.getElementById('rg').value.trim(),
+    cpf: document.getElementById('cpf').value.trim(),
+    civil: document.getElementById('civil').value.trim(),
+    prof: document.getElementById('prof').value.trim(),
+    end: document.getElementById('end').value.trim(),
+    bairro: document.getElementById('bairro').value.trim(),
+    cep: document.getElementById('cep').value.trim(),
+    pai: document.getElementById('pai').value.trim(),
+    mae: document.getElementById('mae').value.trim(),
+    conjuge: document.getElementById('conjuge').value.trim(),
+    filhos: document.getElementById('filhos').value.trim(),
+    conversao: document.getElementById('conversao').value.trim(),
+    batizado: document.getElementById('batizado').value,
+    igant: document.getElementById('igant').value.trim(),
+    carteirinha: document.getElementById('carteirinha').value,
+    pastor: document.getElementById('pastor').value.trim(),
+    ministerio: document.getElementById('ministerio').value.trim(),
+    obs: document.getElementById('obs').value.trim(),
+    assinatura: document.getElementById('assinatura').value.trim()
+  };
+
   if(!d.nome||!d.tel){alert('Preencha nome e WhatsApp');return;}
-  let msg=`*NOVA FICHA - FAMÍLIA DOULOS*%0A%0A`;for(let k in d){msg+=`*${k.toUpperCase()}:* ${d[k]}%0A`;}
+
+  let texto = `🙏 *NOVA FICHA - FAMÍLIA DOULOS*\n`;
+  texto += `📅 ${new Date().toLocaleDateString('pt-BR')} - ${new Date().toLocaleTimeString('pt-BR')}\n`;
+  texto += `-----------------------------------\n\n`;
+
+  texto += `*1 - DADOS PESSOAIS*\n`;
+  texto += `👤 Nome: ${d.nome}\n`;
+  texto += `📱 WhatsApp: ${d.tel}\n`;
+  if(d.nasc) texto += `🎂 Nascimento: ${d.nasc}\n`;
+  if(d.sexo) texto += `Sexo: ${d.sexo}\n`;
+  if(d.civil) texto += `Estado Civil: ${d.civil}\n`;
+  if(d.prof) texto += `Profissão: ${d.prof}\n`;
+  if(d.rg) texto += `RG: ${d.rg}\n`;
+  if(d.cpf) texto += `CPF: ${d.cpf}\n`;
+  texto += `\n`;
+
+  texto += `*2 - ENDEREÇO E FAMÍLIA*\n`;
+  if(d.end || d.bairro || d.cep) texto += `📍 ${d.end}${d.bairro ? ' - '+d.bairro : ''}${d.cep ? ' - CEP: '+d.cep : ''}\n`;
+  if(d.pai) texto += `Pai: ${d.pai}\n`;
+  if(d.mae) texto += `Mãe: ${d.mae}\n`;
+  if(d.conjuge) texto += `Cônjuge: ${d.conjuge}\n`;
+  if(d.filhos) texto += `Filhos: ${d.filhos}\n`;
+  texto += `\n`;
+
+  texto += `*3 - VIDA CRISTÃ*\n`;
+  if(d.conversao) texto += `Conversão: ${d.conversao}\n`;
+  if(d.batizado) texto += `Batizado: ${d.batizado}\n`;
+  if(d.igant) texto += `Igreja Anterior: ${d.igant}\n`;
+  if(d.carteirinha) texto += `Carteirinha: ${d.carteirinha}\n`;
+  if(d.pastor) texto += `Pastor: ${d.pastor}\n`;
+  texto += `\n`;
+
+  texto += `*4 - MINISTÉRIO*\n`;
+  if(d.ministerio) texto += `Deseja servir em: ${d.ministerio}\n`;
+  if(d.obs) texto += `Obs/Testemunho: ${d.obs}\n`;
+  texto += `\n✍️ Assinatura: ${d.assinatura || d.nome}`;
+
+  const msg = encodeURIComponent(texto);
   window.open(`https://wa.me/5521983234385?text=${msg}`,'_blank');
 }
 </script>
